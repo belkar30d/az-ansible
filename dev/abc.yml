@@ -1,0 +1,16 @@
+azf:
+  resource_group:
+    name: myResourceGroupWebapp
+    location: eastus
+
+  name: myResourceGroup
+  location: eastus
+
+
+resource_group_webapp: myResourceGroupWebapp
+resource_group: myResourceGroup
+webapp_name: myLinuxWebApp
+plan_name: myAppServicePlan
+location: eastus
+traffic_manager_profile_name: myTrafficManagerProfile
+traffic_manager_endpoint_name: myTrafficManagerEndpoint

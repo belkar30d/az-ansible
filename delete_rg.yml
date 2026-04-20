@@ -1,0 +1,33 @@
+# ---
+# - hosts: localhost
+#   tasks:
+#    - name: Deleteing rg {{ rg_name }}
+#      azure_rm_resourcegroup:
+#        name: "{{ rg_name }}"
+#        state: absent
+#      register: rg
+#    - debug:
+#       var: rg
+
+
+---
+- hosts: localhost
+  tasks:
+   - name: include task
+     include_vars:
+        file: dev/onboarding.yml
+   - name: Check file exists
+     stat:
+        path: dev/abc.yml
+     register: file_check
+
+   - debug:
+        var: file_check
+    
+   - name: Deleteing rg {{ azf.resource_group.name }}
+     azure_rm_resourcegroup:
+       name: "{{ azf.resource_group.name }}"
+       state: absent
+     register: rg
+   - debug:
+      var: rg      

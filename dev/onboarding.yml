@@ -1,0 +1,7 @@
+azf:
+  resource_group:
+    name: test-rg
+    location: eastus
+
+  name: test44-rg
+  location: eastus

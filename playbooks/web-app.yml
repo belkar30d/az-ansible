@@ -1,0 +1,35 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: include onboarding file 
+     ansible.builtin.include_vars:
+        file: "../dev/abc.yml"
+     register: rg
+   - ansible.builtin.debug:
+        var: rg
+
+   - name: Create Resource Group {{ azf.resource_group.name }}
+     azure.azcollection.azure_rm_resourcegroup:        
+        name: "{{ azf.resource_group.name }}"
+        location: "{{ azf.resource_group.location }}"
+   - name: Show azf structure
+     debug:
+            msg: "{{ azf | to_nice_json }}"
+
+   - name: create secendry RG Group
+     azure.azcollection.azure_rm_resourcegroup:
+        name: "{{ azf.name }}"
+        location: "{{ azf.location }}"
+     register: second_rg
+
+   - ansible.builtin.debug:
+        var: second_rg
+   - name: Create web app plan
+     azure.azcollection.azure_rm_appserviceplan:
+        name: "{{ plan_name }}"
+        resource_group: "{{ azf.resource_group.name }}"
+        location: "{{ azf.resource_group.location }}"
+        is_linux: true
+        sku: s1
+        number_of_workers: 1
