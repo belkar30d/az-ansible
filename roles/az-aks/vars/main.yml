@@ -1,0 +1,12 @@
+#SPDX-License-Identifier: MIT-0
+---
+# vars file for az-aks
+
+resource_group: aks_cluster_RG
+location: centralindia
+aks_name: myakscluster
+username: azuser
+ssh_key: " your key"
+client_id: "your_client_id"
+client_secret: "your secret"
+aks_version: aks_version

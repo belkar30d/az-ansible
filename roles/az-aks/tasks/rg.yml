@@ -1,0 +1,6 @@
+---
+
+- name: create aks cluster resoruce group
+  azure.azcollection.azure_rm_resourcegroup:
+    name: "{{ resource_group }}"
+    location: "{{ location }}"

@@ -1,0 +1,7 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for az-aks
+
+
+- name: create resoruce group
+  ansible.builtin.include_tasks: rg.yml

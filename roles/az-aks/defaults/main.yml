@@ -1,0 +1,13 @@
+#SPDX-License-Identifier: MIT-0
+---
+# defaults file for az-aks
+
+resource_group: myresourcegroup21
+location: eastus
+aks_name: myakscluster
+username: azuser
+ssh_key: " your key"
+client_id: "your_client_id"
+client_secret: "your secret"
+aks_version: aks_version
+

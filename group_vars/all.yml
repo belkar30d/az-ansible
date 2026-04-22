@@ -10,6 +10,8 @@ admin_password: "Str0ngP@ssw0rd!2026"
 # admin_username: azureuser
 location: centralindia 
 
+resource_group: myresourcegroup120
+
 vm_size: Standard_D2as_v5
 admin_username: dsadmin
 # location: eastus
