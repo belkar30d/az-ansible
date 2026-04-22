@@ -1,0 +1,35 @@
+---
+- name: Create Vnet
+  azure.azcollection.azure_rm_virtualnetwork:
+    name: "{{ vnet_name }}"
+    resource_group: "{{ rg_name }}"
+    address_prefixes: "{{ vnet_address }}"
+
+
+- name: Create Subnet
+  azure.azcollection.azure_rm_subnet:
+    resource_group: "{{ rg_name }}"
+    name: "{{ subnet_name }}"
+    address_prefix: "{{ subnet_address }}"
+    virtual_network: "{{ vnet_name }}"
+
+- name: create Public IP
+  azure.azcollection.azure_rm_publicipaddress:
+    resource_group: "{{ rg_name }}"
+    allocation_method: Static
+    name: "{{ item.public_ip }}"
+    sku: standard
+  loop: "{{ vms }}"
+
+- name: create NIC
+  azure.azcollection.azure_rm_networkinterface:
+    resource_group: "{{ rg_name }}"
+    location: "{{ location }}"
+    name: "{{ item.nic_name }}"
+    virtual_network: "{{ vnet_name }}"
+    subnet: "{{ subnet_name }}"
+    ip_configurations:
+      - name: ipconfig1
+        public_ip_address_name: "{{ item.public_ip }}"
+  loop: "{{ vms }}"
+

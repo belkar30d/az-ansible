@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  connection: local
+
+  tasks: 
+  - name: List resources in RG
+    azure.azcollection.azure_rm_resourcegroup_info:
+      name: "{{ rg_name }}"
+      list_resources: true
+    register: rg_info
+
+  - debug:
+      var: rg_info
+      
+  - name: Delete RG
+    azure.azcollection.azure_rm_resourcegroup:
+      name: "{{ rg_name }}"
+      state: absent
+      force_delete_nonempty: true

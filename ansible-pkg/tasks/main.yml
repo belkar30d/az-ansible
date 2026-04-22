@@ -1,3 +1,5 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # tasks file for ansible-pkg
+- name: crate rg
+  azure_rm_r

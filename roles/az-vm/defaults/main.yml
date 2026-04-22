@@ -1,0 +1,16 @@
+# #SPDX-License-Identifier: MIT-0
+# ---
+# # defaults file for az-vm
+# vm_size: Standard_D2as_v5
+# admin_username: dsadmin
+# location: eastus
+
+# image:
+#   publisher: Canonical
+#   offer: 0001-com-ubuntu-server-focal
+#   sku: 20_04-lts-gen2
+#   version: latest
+# # 
+# vnet_address: "10.0.0.0/16"
+# subnet_address: "10.0.1.0/24"
+

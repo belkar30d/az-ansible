@@ -10,7 +10,7 @@
         var: rg
 
    - name: Create Resource Group {{ azf.resource_group.name }}
-     azure.azcollection.azure_rm_resourcegroup:        
+     azure.azcollection.azure_rm_resourcegroup:       
         name: "{{ azf.resource_group.name }}"
         location: "{{ azf.resource_group.location }}"
    - name: Show azf structure
@@ -25,6 +25,7 @@
 
    - ansible.builtin.debug:
         var: second_rg
+
    - name: Create web app plan
      azure.azcollection.azure_rm_appserviceplan:
         name: "{{ plan_name }}"
@@ -33,3 +34,30 @@
         is_linux: true
         sku: s1
         number_of_workers: 1
+
+   - name: create App service on linux with java Runtime
+     azure.azcollection.azure_rm_webapp:
+      resource_group: "{{ azf.resource_group.name }}"
+      name: "{{ webapp_name }}"
+      plan: 
+       resource_group: "{{ azf.resource_group.name }}"
+       name: "{{ plan_name }}"
+       is_linux: true
+       sku: S1
+       number_of_workers: 1
+       app_settings:
+          testkey: "testvalue"
+      frameworks:
+          - name: java
+            version: 8
+            settings:
+              java_container: "Tomcat"
+              java_container_version: "8.5"
+
+   - name: Get web app facts
+     azure.azcollection.azure_rm_webapp_info:      
+      resource_group: "{{ azf.resource_group.name }}"
+      name: "{{ webapp_name }}"
+     register: webapp
+
+       

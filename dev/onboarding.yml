@@ -1,7 +1,7 @@
 azf:
   resource_group:
-    name: test-rg
-    location: eastus
+    name: dev-rg
+    location: centralindia
 
   name: test44-rg
-  location: eastus
+  location: centralindia

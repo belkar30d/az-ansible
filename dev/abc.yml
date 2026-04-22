@@ -1,16 +1,17 @@
 azf:
   resource_group:
-    name: myResourceGroupWebapp
-    location: eastus
+    name: dev-rg
+    location: centralindia
 
   name: myResourceGroup
-  location: eastus
+  location: centralindia
 
 
 resource_group_webapp: myResourceGroupWebapp
 resource_group: myResourceGroup
-webapp_name: myLinuxWebApp
+webapp_name: winr123456
 plan_name: myAppServicePlan
-location: eastus
+location: centralindia
 traffic_manager_profile_name: myTrafficManagerProfile
 traffic_manager_endpoint_name: myTrafficManagerEndpoint
+

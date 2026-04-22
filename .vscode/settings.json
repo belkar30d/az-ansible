@@ -1,0 +1,15 @@
+{
+  "python.defaultInterpreterPath": "/home/dsadmin/ansible/az-ansible/venv/bin/python3",
+
+  "ansible.python.interpreterPath": "/home/dsadmin/ansible/az-ansible/venv/bin/python3",
+  "ansible.ansible.path": "/home/dsadmin/ansible/az-ansible/venv/bin/ansible",
+
+  "ansible.executionEnvironment.enabled": false,
+  "ansible.server.runtime": "python",
+
+  "ansible.validation.enabled": true,
+  "ansible.validation.lint.enabled": true,
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks": "file:///home/dsadmin/ansible/az-ansible/ansible-pkg/tasks/main.yml"
+  }
+}

@@ -1,0 +1,275 @@
+openapi: 3.1.0
+info:
+  title: Ansible Development Tools APIs
+  version: 1.0.0
+  description: APIs for ansible development tools
+paths:
+  /metadata:
+    get:
+      summary: Retrieve versions of installed tools and existing API endpoints
+      responses:
+        "200":
+          description: A list of installed tools and their versions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Metadata"
+  /v1/creator/collection:
+    post:
+      summary: Create a new collection project
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatorCollection"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/tar:
+              schema:
+                AnyValue: {}
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /v1/creator/playbook:
+    post:
+      summary: Create a new playbook project
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatorPlaybook"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/tar:
+              schema:
+                AnyValue: {}
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /v2/creator/collection:
+    post:
+      summary: Create a new collection project
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatorCollection"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/tar:
+              schema:
+                AnyValue: {}
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /v2/creator/playbook:
+    post:
+      summary: Create a new playbook project
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatorPlaybookNewCLI"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/tar:
+              schema:
+                AnyValue: {}
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /v2/creator/devfile:
+    post:
+      summary: Create a new devfile project
+      responses:
+        "201":
+          description: Created
+          content:
+            application/tar:
+              schema:
+                AnyValue: {}
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /v2/creator/ee_project:
+    post:
+      summary: Create a new execution environment project
+      responses:
+        "201":
+          description: Created
+          content:
+            application/tar:
+              schema:
+                AnyValue: {}
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /v2/creator/capabilities:
+    get:
+      summary: Retrieve the full ansible-creator capability tree
+      responses:
+        "200":
+          description: The capability schema describing all available commands
+          content:
+            application/json:
+              schema:
+                AnyValue: {}
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /v2/creator/schema:
+    get:
+      summary: Retrieve parameter schema for a specific creator command
+      parameters:
+        - name: command_path
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+      responses:
+        "200":
+          description: The parameter schema for the specified command
+          content:
+            application/json:
+              schema:
+                AnyValue: {}
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /v2/creator/scaffold:
+    post:
+      summary: Scaffold an ansible-creator project dynamically
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatorScaffold"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/tar:
+              schema:
+                AnyValue: {}
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreatorScaffoldError"
+
+components:
+  schemas:
+    Metadata:
+      type: object
+      properties:
+        versions:
+          type: object
+          additionalProperties:
+            type: string
+        apis:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    CreatorCollection:
+      type: object
+      additionalProperties: false
+      properties:
+        collection:
+          type: string
+        project:
+          type: string
+    CreatorPlaybook:
+      type: object
+      additionalProperties: false
+      properties:
+        project:
+          type: string
+        scm_project:
+          type: string
+        scm_org:
+          type: string
+    CreatorPlaybookNewCLI:
+      type: object
+      additionalProperties: false
+      properties:
+        project:
+          type: string
+        collection_name:
+          type: string
+        namespace:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+    CreatorScaffold:
+      type: object
+      additionalProperties: false
+      required:
+        - command_path
+      properties:
+        command_path:
+          type: array
+          items:
+            type: string
+        params:
+          type: object
+    CreatorScaffoldError:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+        logs:
+          type: array
+          items:
+            type: string

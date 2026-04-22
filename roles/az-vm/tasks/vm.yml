@@ -1,0 +1,16 @@
+---
+
+- name: create VM
+  azure.azcollection.azure_rm_virtualmachine:
+    resource_group: "{{ rg_name }}"
+    location: "{{ location }}"
+    name: "{{ item.name }}"
+    vm_size: "{{ vm_size }}"
+    admin_username: "{{ admin_username }}"
+    admin_password: "{{ admin_password }}"
+    network_interfaces: "{{ item.nic_name }}"
+    managed_disk_type: Standard_LRS 
+    os_type: Linux 
+    image: "{{ image }}"
+  loop: "{{ vms }}"
+

@@ -1,0 +1,33 @@
+---
+
+rg_name: dev-rg
+vm_name: dev-vm
+vnet_name: dev-vnet
+subnet_name: dev-subnet
+nic_name: dev-nic
+public_ip_name: dev-ip
+admin_password: "Str0ngP@ssw0rd!2026"
+# admin_username: azureuser
+location: centralindia 
+
+vm_size: Standard_D2as_v5
+admin_username: dsadmin
+# location: eastus
+
+image:
+  publisher: Canonical
+  offer: 0001-com-ubuntu-server-focal
+  sku: 20_04-lts-gen2
+  version: latest
+
+vnet_address: "10.0.0.0/16"
+subnet_address: "10.0.1.0/24"
+
+vms:
+  - name: dev-vm-1
+    nic_name: dev-nic-1
+    public_ip: dev-ip-1
+
+  - name: dev-vm-2
+    nic_name: dev-nic-2
+    public_ip: dev-ip-2
